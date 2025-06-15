@@ -97,6 +97,20 @@ public class UserServiceImpl implements UserService {
         return;
     }
 
+    @Override
+    public User validateToken(String tokenValue) throws InvalidTokenException {
+
+        Optional<Token> optionalToken = tokenRepository.findByValueAndDeleted(tokenValue, false);
+
+        if(optionalToken.isEmpty()){
+            throw new InvalidTokenException("Invalid Token Passed!");
+        }
+
+        Token token = optionalToken.get();
+
+        return token.getUser();
+    }
+
     private Token generateToken(User user){
 
         LocalDate currentTime = LocalDate.now(); //Current Time

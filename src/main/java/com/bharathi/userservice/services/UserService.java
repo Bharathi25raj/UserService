@@ -15,4 +15,6 @@ public interface UserService {
 
     void logout(String token) throws InvalidTokenException;
 
+    User validateToken(String tokenValue) throws InvalidTokenException;
+
 }
