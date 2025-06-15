@@ -3,6 +3,7 @@ package com.bharathi.userservice.services;
 import com.bharathi.userservice.dtos.LogInResponseDto;
 import com.bharathi.userservice.dtos.UserDto;
 import com.bharathi.userservice.exceptions.InvalidPasswordException;
+import com.bharathi.userservice.exceptions.InvalidTokenException;
 import com.bharathi.userservice.exceptions.UserNotFoundException;
 import com.bharathi.userservice.models.Token;
 import com.bharathi.userservice.models.User;
@@ -78,6 +79,22 @@ public class UserServiceImpl implements UserService {
 
         return tokenRepository.save(token);
 
+    }
+
+    @Override
+    public void logout(String tokenValue) throws InvalidTokenException {
+
+        //validate if te given token is present in the DB and deleted = false
+        Optional<Token> optionalToken = tokenRepository.findByValueAndDeleted(tokenValue, false);
+
+        if(optionalToken.isEmpty()){
+            throw new InvalidTokenException("Invalid Token Passed");
+        }
+
+        Token token = optionalToken.get();
+        token.setDeleted(true);
+        tokenRepository.save(token);
+        return;
     }
 
     private Token generateToken(User user){
