@@ -2,6 +2,7 @@ package com.bharathi.userservice.controllers;
 
 import com.bharathi.userservice.dtos.*;
 import com.bharathi.userservice.exceptions.InvalidPasswordException;
+import com.bharathi.userservice.exceptions.InvalidTokenException;
 import com.bharathi.userservice.exceptions.UserNotFoundException;
 import com.bharathi.userservice.models.Token;
 import com.bharathi.userservice.models.User;
@@ -59,7 +60,7 @@ public class UserController {
     }
 
     @PostMapping("/validate/{tokenValue}")
-    public UserDto validateToken(@PathVariable String tokenValue){
+    public UserDto validateToken(@PathVariable String tokenValue) throws InvalidTokenException {
         return UserDto.from(userService.validateToken(tokenValue));
     }
 

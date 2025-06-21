@@ -1,7 +1,5 @@
 package com.bharathi.userservice.services;
 
-import com.bharathi.userservice.dtos.LogInResponseDto;
-import com.bharathi.userservice.dtos.UserDto;
 import com.bharathi.userservice.exceptions.InvalidPasswordException;
 import com.bharathi.userservice.exceptions.InvalidTokenException;
 import com.bharathi.userservice.exceptions.UserNotFoundException;
@@ -9,7 +7,6 @@ import com.bharathi.userservice.models.Token;
 import com.bharathi.userservice.models.User;
 import com.bharathi.userservice.repositories.TokenRepository;
 import com.bharathi.userservice.repositories.UserRepository;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.text.RandomStringGenerator;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
